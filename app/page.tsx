@@ -18,7 +18,9 @@ export default async function Home() {
       <div className="bg-gray-100 rounded-lg p-4 text-center mb-6">
         <p className="text-gray-600">Signed in as:</p>
         <p className="font-medium text-black">{session?.user?.email}</p>
-        <SignOut />
+        <div className="mt-6">
+          <SignOut />
+        </div>
       </div>
     </div>
   );

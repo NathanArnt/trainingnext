@@ -7,9 +7,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ArrowRightCircle} from "lucide-react";
-import Link from "next/link";
 import { useEffect, useState } from "react";
+import AjouterPanier from "./ajouterPanier";
+import Image from "next/image";
 
 // Define the type of a product
 interface Product {
@@ -17,6 +17,7 @@ interface Product {
   name: string;
   description: string;
   price: number;
+  image: string;
 }
 
 export default function Home() {
@@ -46,27 +47,31 @@ export default function Home() {
   return (
     <div className="w-screen h-screen max-w-[80%] m-auto ">
       <h1 className="text-2xl underline my-10">Liste des produits</h1>
-    <div className="flex flex-wrap gap-10 justify-center">
-      {products?.map((product) => (
-        <Card
-        key={product.id}
-        className="min-w-[250px] hover:scale-110 cursor-pointer transition ease-linear"
-        >
-          <CardHeader>
-            <CardTitle>{product.name}</CardTitle>
-            <CardDescription>{product.description}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="flex justify-between items-center">
-                <p>Price: ${product.price}</p>
-                <Link href={`/products/${product.id}`}>
-                    <ArrowRightCircle/>
-                </Link>
-            </div>
-          </CardContent>
-        </Card>
-      ))}
-    </div>
+      <div className="flex flex-wrap gap-10 justify-center">
+        {products?.map((product) => (
+          <Card
+          key={product.id}
+          className="min-w-[250px] cursor-pointer transition ease-linear"
+          >
+            <CardHeader>
+              <Image
+                src="/"
+                alt="Product img"
+                width={100}
+                height={100}
+              />
+            </CardHeader>
+            <CardContent>
+              <div className="flex justify-between items-center">
+                <CardTitle>{product.name}</CardTitle>
+                <div className="flex items-center">{product.price}<p className="pl-1">€</p></div> 
+              </div>
+              <CardDescription className="pt-2 pb-4">{product.description}</CardDescription>
+              <AjouterPanier/>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 }

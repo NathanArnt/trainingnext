@@ -1,49 +1,52 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
+generator client {
+  provider = "prisma-client-js"
+}
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
- 
-generator client {
-  provider = "prisma-client-js"
+
+enum RoleUser {
+  USER
+  CLIENT
+  ADMIN
 }
- 
+
 model User {
-  id            String          @id @default(cuid())
-  name          String?         @db.VarChar(191)
-  username      String?         @unique @db.VarChar(191)
-  email         String?         @unique @db.VarChar(191)
-  emailVerified DateTime?   
-  image         String?         @db.VarChar(255)
-  accounts      Account[]
+  id            String          @id @default(cuid()) @db.VarChar(100) // Primary key limited to 191
+  name          String?         @db.VarChar(100) // Reduced length
+  surname       String?         @db.VarChar(100) // Reduced length
+  email         String?         @unique @db.VarChar(100) // Unique index, length reduced to 191
+  password      String?         @db.VarChar(191)
+  role          RoleUser        @default(CLIENT)
+  emailVerified DateTime?       
+  accounts      Account[] 
   sessions      Session[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
  
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
 }
  
 model Account {
-  id                       String  @id @default(cuid())
-  userId                   String  @unique
-  type                     String  @db.VarChar(191) 
-  provider                 String  @db.VarChar(191)
-  providerAccountId        String  @db.VarChar(191)
-  refresh_token            String? @db.Text 
+  id                       String  @id @default(cuid()) @db.VarChar(100) // Primary key limited to 191
+  userId                   String  @db.VarChar(191) // Foreign key referencing User(id)
+  type                     String  @db.VarChar(100) // Reduced length
+  provider          String  @db.VarChar(50) // Réduit à 50
+  providerAccountId String  @db.VarChar(100) // Réduit à 100
+  refresh_token            String? @db.Text
   access_token             String? @db.Text
   expires_at               Int?
-  token_type               String?  @db.VarChar(191)
-  scope                    String?  @db.VarChar(191)
+  token_type               String? @db.VarChar(100) // Reduced length
+  scope                    String? @db.VarChar(100) // Reduced length
   id_token                 String? @db.Text
-  session_state            String?  
+  session_state            String? @db.VarChar(100) // Reduced length
   refresh_token_expires_in Int?
-  user                     User?   @relation(fields: [userId], references: [id])
+  user                     User    @relation(fields: [userId], references: [id])
  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -53,9 +56,9 @@ model Account {
 }
  
 model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
+  id           String   @id @default(cuid()) @db.VarChar(191) // Primary key limited to 191
+  sessionToken String   @unique @db.VarChar(191) // Unique index, reduced to 191
+  userId       String   
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id])
  
@@ -66,8 +69,8 @@ model Session {
 }
  
 model VerificationToken {
-  identifier String
-  token      String
+  identifier String @db.VarChar(100) // Réduit à 100
+  token      String @db.VarChar(100) // Réduit à 100
   expires    DateTime
  
   @@unique([identifier, token])
@@ -75,16 +78,37 @@ model VerificationToken {
  
 // Optional for WebAuthn support
 model Authenticator {
-  credentialID         String  @unique
-  userId               String
-  providerAccountId    String
-  credentialPublicKey  String
+  credentialID         String  @unique @db.VarChar(50) // Reduced length
+  userId               String  
+  providerAccountId    String  @db.VarChar(191) // Reduced length
+  credentialPublicKey  String  @db.VarChar(191) // Reduced length
   counter              Int
-  credentialDeviceType String
+  credentialDeviceType String  @db.VarChar(191) // Reduced length
   credentialBackedUp   Boolean
-  transports           String?
+  transports           String? @db.VarChar(191) // Reduced length
  
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
  
   @@id([userId, credentialID])
+}
+
+model Products {
+  id          Int          @id @default(autoincrement()) 
+  name        String?      @db.VarChar(191)
+  price       Float?    
+  description String?      @db.VarChar(191)
+  image       String?      @db.VarChar(255)
+  categories  Categories[]
+  commandes   Commandes[]
+}
+
+model Categories {
+  id        Int          @id @default(autoincrement())
+  name      String?      @db.VarChar(191)
+  products  Products[]
+}
+
+model Commandes {
+  id        Int          @id @default(autoincrement())
+  products  Products[]
 }

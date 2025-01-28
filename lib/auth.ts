@@ -6,6 +6,7 @@ import Credentials from "next-auth/providers/credentials";
 import GitHub from "next-auth/providers/github";
 import { schema } from "@/lib/schema";
 import { prisma } from "./prisma";
+// import { compare } from "bcrypt";
 
 const adapter = PrismaAdapter(prisma);
 
@@ -27,10 +28,22 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             password: validatedCredentials.password,
           },
         });
-
+        
         if (!user) {
           throw new Error("Invalid credentials.");
         }
+        // // Explicitly check for null or undefined before using the password
+        // if (!user.password) {
+        //   throw new Error("Password not found for the user.");
+        // }
+
+        // const isPasswordValid = await compare(
+        //   validatedCredentials.password, // Ensure `validatedCredentials.password` is a string
+        //   user.password
+        // );
+        // if (!isPasswordValid) {
+        //   return null
+        // }
 
         return user;
       },

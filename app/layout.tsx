@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { ThemeProvider } from '@/components/ui/theme-provider'
-import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar'
-import { AppSidebar } from '@/components/app-sidebar'
+import { SessionProvider } from 'next-auth/react'
+import NavbarApp from '@/components/navbar'
 
 export const metadata: Metadata = {
   title: 'NextApp',
@@ -20,20 +20,19 @@ export default function RootLayout({
       className='scroll-smooth antialiased'
       suppressHydrationWarning
     >
-      <body className="">
+      <body>
         <ThemeProvider
           enableSystem
           attribute='class'
           defaultTheme='system'
           disableTransitionOnChange
         >
-          
-            <SidebarProvider>
-              <AppSidebar />
-              <SidebarTrigger />
-              <main className='w-screen height-screen'>{children}</main>
-            </SidebarProvider>
-          
+          <SessionProvider>
+            <main className='w-screen height-screen'>
+              <NavbarApp/>
+              {children}
+            </main>
+          </SessionProvider>
         </ThemeProvider>
       </body>
     </html>
