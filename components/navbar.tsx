@@ -1,9 +1,13 @@
-import { ShoppingCart, UserCircle } from "lucide-react"
+"use client"
+
 import Link from "next/link"
 import { ThemeToggle } from "./ui/theme-toggle"
 import Menu from "./menu"
+import NavIcons from "./NavIcons"
 
 const NavbarApp = () => {
+
+
   return (
     <div className="relative h-20 px-4 md:px-8 lg:px-16 xl:32 2xl:px-64">
         {/* Mobile  */}
@@ -11,7 +15,11 @@ const NavbarApp = () => {
             <Link href="/">
                 <div className="text-2xl tracking-widest">SLAWYY</div>
             </Link>
-            <Menu/>
+            <div className="flex items-center gap-2">
+                <Menu/>
+                <ThemeToggle/>
+            </div>
+            
         </div>
         <div className="hidden md:flex items-center justify-between gap-8 h-full ">
             <h1 className="hover:scale-110 transition ease-linear cursor-pointer">Slawyy&apos;s market</h1>
@@ -23,8 +31,7 @@ const NavbarApp = () => {
                 <Link href="" className="flex items-center hover:scale-110 transition ease-linear">Contact</Link>
             </div>
             <div className="flex items-center gap-4">
-                <Link href="/customers/account" className="flex items-center hover:scale-110 transition ease-linear"><UserCircle/></Link>
-                <Link href="" className="flex items-center hover:scale-110 transition ease-linear"><ShoppingCart/></Link>
+                <NavIcons/>
                 <div className="hover:scale-110 transition ease-linear"><ThemeToggle /></div>
             </div>
         </div>
