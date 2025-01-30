@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { ThemeToggle } from "./ui/theme-toggle"
-import Menu from "./menu"
+import Menu from "./Menu"
 import NavIcons from "./NavIcons"
 
 const NavbarApp = () => {

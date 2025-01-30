@@ -40,10 +40,9 @@ const ProductList = () => {
       }
 
   return (
-    <div className="my-12 flex gap-x-8 gap-y-16 justify-between flex-wrap">
+    <div className="mt-12 flex gap-x-8 gap-y-16 justify-between flex-wrap lg:flex-nowrap">
         {products?.map((product) => (
-            <Link href={product.name} className="w-full flex flex-col gap-4 sm:w-[45%] lg:[22%]" key={product.id}>
-        
+          <Link href={product.name} className="w-full flex flex-col gap-4 sm:w-[45%] lg:[22%]" key={product.id}>
             <div className="relative w-full h-80">
                 <Image
                     src="https://images.pexels.com/photos/19377629/pexels-photo-19377629/free-photo-of-fruits-bouquet-vase-nature-morte.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
@@ -66,7 +65,7 @@ const ProductList = () => {
             </div>
             <div className="text-sm text-gray-500">{product.description}</div>
             <Button>Add to Card</Button>
-        </Link>
+          </Link>
         ))}
     </div>
   )

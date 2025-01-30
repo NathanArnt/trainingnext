@@ -36,7 +36,6 @@ const Page = async () => {
             })
         }}
         >
-        
         <Input
           name="email"
           placeholder="Email"
