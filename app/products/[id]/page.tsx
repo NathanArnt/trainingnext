@@ -1,47 +1,14 @@
-'use client'
-
+import { Button } from "@/components/ui/button";
+import { prisma } from "@/lib/prisma";
 import Image from "next/image"
 import Link from "next/link"
-import { Button } from "./ui/button"
-import { useEffect, useState } from "react";
 
-interface Product {
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-    image: string;
-  }
-
-const ProductList = () => {
-
-    const [products, setProducts] = useState<Product[] | null>(null);
-      const [isLoading, setLoading] = useState(true);
+const ProductList = async ({params}: {params? : string}) => {
     
-      useEffect(() => {
-        fetch("/api/products")
-          .then((res) => res.json())
-          .then((data: Product[]) => {
-            setProducts(data); // Update state with fetched data
-            setLoading(false); // Stop loading
-          })
-          .catch((error) => {
-            console.error("Error fetching products:", error);
-            setLoading(false); // Stop loading even if there's an error
-          });
-      }, []);
-    
-      if (isLoading) {
-        return (
-            <div className="flex items-center justify-center">
-                <p>Loading....</p>
-            </div>
-        );
-      }
+    const products = await prisma.products.findUnique(params)
 
   return (
     <div className="mt-12 flex gap-x-8 gap-y-16 justify-between flex-wrap lg:flex-nowrap">
-        {products?.map((product) => (
           <Link href={`/products/${product.id}`} className="w-full flex flex-col gap-4 sm:w-[45%] lg:[22%]" key={product.id}>
             <div className="relative w-full h-80">
                 <Image

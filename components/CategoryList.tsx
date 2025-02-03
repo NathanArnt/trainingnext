@@ -14,7 +14,7 @@ const CategoryList = () => {
   const [categories, setCategories] = useState<Categories[] | null>(null);
   const [isLoading, setLoading] = useState(true);
     
-      useEffect(() => {
+      useEffect(() => { 
         fetch("/api/category")
           .then((res) => res.json())
           .then((data: Categories[]) => {
