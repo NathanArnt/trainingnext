@@ -5,10 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Suspense } from "react";
 
 
-export default async function Home({searchParams} : {
-  searchParams: Promise<{query?: string}>
-}) {
-  const query = (await searchParams).query;
+export default function Home() {
   return (
     <div className="">
       <Slider/>
@@ -27,7 +24,7 @@ export default async function Home({searchParams} : {
       <Suspense fallback={<Skeleton/>}>
         <div className="my-24 px-4 md:px-8 lg:px-16 xl:px-32 2xl:px-64">
           <h1 className="text-2xl">New Products</h1>
-          <ProductList query={query}/>
+          <ProductList/>
         </div>
       </Suspense>
     </div>

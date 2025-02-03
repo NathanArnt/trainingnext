@@ -7,7 +7,6 @@ import NavIcons from "./NavIcons"
 
 const NavbarApp = () => {
 
-
   return (
     <div className="relative h-20 px-4 md:px-8 lg:px-16 xl:32 2xl:px-64">
         {/* Mobile  */}
@@ -25,7 +24,7 @@ const NavbarApp = () => {
             <h1 className="hover:scale-110 transition ease-linear cursor-pointer">Slawyy&apos;s market</h1>
             <div className="Links flex items-center gap-4">
                 <Link href="/" className="flex items-center  hover:scale-110 transition ease-linear">Home</Link>
-                <Link href="/products" className="flex items-center hover:scale-110 transition ease-linear">Shop</Link>
+                <Link href="/list" className="flex items-center hover:scale-110 transition ease-linear">Shop</Link>
                 <Link href="" className="flex items-center hover:scale-110 transition ease-linear">Deals</Link>
                 <Link href="" className="flex items-center hover:scale-110 transition ease-linear">About</Link>
                 <Link href="" className="flex items-center hover:scale-110 transition ease-linear">Contact</Link>

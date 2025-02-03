@@ -6,7 +6,7 @@ import { Button } from "./ui/button"
 import { useEffect, useState } from "react";
 
 interface Product {
-    id: number;
+    id: string;
     name: string;
     description: string;
     price: number;

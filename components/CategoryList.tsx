@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useEffect, useState } from "react";
 
 interface Categories {
-  id: number;
+  id: string;
   name: string;
 }
 
