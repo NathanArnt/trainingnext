@@ -2,18 +2,13 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Button } from "./ui/button"
 import { useEffect, useState } from "react";
-
-interface Product {
-    id: string;
-    name: string;
-    description: string;
-    price: number;
-    image: string;
-  }
-
-const ProductList = () => {
+import { Product } from '@/lib/features/counter/cartSlice';
+import AddToCart from "./AddToCart";
+interface Props {
+  product: Product;
+}
+const ProductList = (props: Props) => {
 
     const [products, setProducts] = useState<Product[] | null>(null);
       const [isLoading, setLoading] = useState(true);
@@ -42,30 +37,32 @@ const ProductList = () => {
   return (
     <div className="mt-12 flex gap-x-8 gap-y-16 justify-between flex-wrap lg:flex-nowrap">
         {products?.map((product) => (
-          <Link href={`/products/${product.id}`} className="w-full flex flex-col gap-4 sm:w-[45%] lg:[22%]" key={product.id}>
-            <div className="relative w-full h-80">
+          <div className="w-full flex flex-col gap-4 sm:w-[45%] lg:[22%]" key={product.id}>
+            <Link href={`/products/${product.id}`} >
+              <div className="relative w-full h-80">
                 <Image
-                    src="https://images.pexels.com/photos/19377629/pexels-photo-19377629/free-photo-of-fruits-bouquet-vase-nature-morte.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                    alt="Product"
-                    fill 
-                    sizes="25vw"
-                    className="absolute object-cover rounded-md z-10 hover:opacity-0 transition-opacity easy duration-500" 
+                  src="https://images.pexels.com/photos/19377629/pexels-photo-19377629/free-photo-of-fruits-bouquet-vase-nature-morte.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  alt="Product"
+                  fill 
+                  sizes="25vw"
+                  className="absolute object-cover rounded-md z-10 hover:opacity-0 transition-opacity easy duration-500" 
                 />
                 <Image
-                    src="https://images.pexels.com/photos/19036832/pexels-photo-19036832/free-photo-of-fruits-bouquet-vase-nature-morte.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
-                    alt="Product"
-                    fill 
-                    sizes="25vw"
-                    className="absolute object-cover rounded-md" 
+                  src="https://images.pexels.com/photos/19036832/pexels-photo-19036832/free-photo-of-fruits-bouquet-vase-nature-morte.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                  alt="Product"
+                  fill 
+                  sizes="25vw"
+                  className="absolute object-cover rounded-md" 
                 />
-            </div>
-            <div className="flex justify-between">
+              </div>
+              <div className="flex my-2 justify-between">
                 <span className="font-medium">{product.name}</span>
                 <span className="font-semibold">{product.price}€</span>
-            </div>
-            <div className="text-sm text-gray-500">{product.description}</div>
-            <Button>Add to Card</Button>
-          </Link>
+              </div>
+              <div className="text-sm text-gray-500">{product.description}</div>
+            </Link>
+            <AddToCart product={product}/>
+          </div>
         ))}
     </div>
   )

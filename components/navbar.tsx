@@ -21,7 +21,7 @@ const NavbarApp = () => {
             
         </div>
         <div className="hidden md:flex items-center justify-between gap-8 h-full ">
-            <h1 className="hover:scale-110 transition ease-linear cursor-pointer">Slawyy&apos;s market</h1>
+            <Link href="/" className="hover:scale-110 transition ease-linear cursor-pointer">Slawyy&apos;s market</Link>
             <div className="Links flex items-center gap-4">
                 <Link href="/" className="flex items-center  hover:scale-110 transition ease-linear">Home</Link>
                 <Link href="/list" className="flex items-center hover:scale-110 transition ease-linear">Shop</Link>

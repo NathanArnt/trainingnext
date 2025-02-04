@@ -1,5 +1,5 @@
-import Counter from "@/components/Counter";
-import { Button } from "@/components/ui/button";
+import AddToCart from "@/components/AddToCart";
+import { Product } from "@/lib/features/counter/cartSlice";
 import { prisma } from "@/lib/prisma";
 import Image from "next/image"
 
@@ -10,11 +10,12 @@ const ProductList = async ({params}: {params?: {id: string}}) => {
         where: { id: Number(id) } // Convert to number
     });
 
+    
     return (
         <div className="mt-12 flex gap-x-8 gap-y-16 justify-between flex-wrap lg:flex-nowrap">
             <div className="w-full flex mx-auto flex-col gap-4 sm:w-[45%] lg:[22%]">
                 <div className="flex">
-                    <div className="relative w-full h-[500px]">
+                    <div className="relative w-full h-[400px]">
                         <Image
                             src="https://images.pexels.com/photos/19377629/pexels-photo-19377629/free-photo-of-fruits-bouquet-vase-nature-morte.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                             alt="Product"
@@ -30,17 +31,13 @@ const ProductList = async ({params}: {params?: {id: string}}) => {
                             className="absolute object-cover rounded-md" 
                         />
                     </div>
-                    <div className="w-full px-4 flex flex-col justify-between h-2/3">
+                    <div className="w-full px-4 flex flex-col justify-between h-40">
                       <div className="flex justify-between">
                         <span className="font-medium text-2xl">{products?.name}</span>
                         <span className="font-semibold text-lg">{Number(products?.price)}€</span>
                       </div>
-                      <div className="flex items-center gap-4 text-gray-500 text-sm">
-                        <p>qty : </p>
-                        <Counter/>  
-                      </div> 
+                      <AddToCart product={params?.id}/>
                       <div className="text-sm text-gray-500">{products?.description}</div>
-                        <Button>Add to Card</Button>
                     </div>
                 </div>
             </div>

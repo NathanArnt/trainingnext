@@ -98,8 +98,9 @@ model Products {
   price       Float?    
   description String?      @db.VarChar(191)
   image       String?      @db.VarChar(255)
+  quantity    Int?           
   categories  Categories[]
-  commandes   Commandes[]
+  orders   Orders[]
 }
 
 model Categories {
@@ -108,7 +109,10 @@ model Categories {
   products  Products[]
 }
 
-model Commandes {
+model Orders {
   id        Int          @id @default(autoincrement())
+  totalPrice Float 
+  status  String  @default("pending")
+  createdAt DateTime @default(now())
   products  Products[]
 }

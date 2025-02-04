@@ -1,10 +1,15 @@
 import Filter from '@/components/Filter'
 import ProductList from '@/components/ProductList'
 import { Button } from '@/components/ui/button'
+import { Product } from '@/lib/features/counter/cartSlice'
 import Image from 'next/image'
 import React from 'react'
 
-const ListPage = () => {
+interface Props {
+    product: Product
+}
+
+const ListPage = (props: Props) => {
   return (
     <div className='px-4 md:px-8 lg:px-16 xl:32 2xl:px-64 relative'>
         <div className='hidden bg-pink-50 px-4 sm:flex justify-between h-64 rounded-lg'>
@@ -24,7 +29,7 @@ const ListPage = () => {
         <Filter/>
         <h1 className='m-12 text-xl font-semibold'>Shoes for you</h1>
         <div className='mb-12'>
-            <ProductList/>
+            <ProductList product={props.product}/>
         </div>
     </div>
   )
