@@ -1,5 +1,4 @@
 import AddToCart from "@/components/AddToCart";
-import { Product } from "@/lib/features/counter/cartSlice";
 import { prisma } from "@/lib/prisma";
 import Image from "next/image"
 
@@ -7,12 +6,13 @@ const ProductList = async ({params}: {params?: {id: string}}) => {
 
     const { id } = await params; // Now we can safely destructure id
     const products = await prisma.products.findUnique({
-        where: { id: Number(id) } // Convert to number
+        where: { 
+            id: Number(id) 
+        } // Convert to number
     });
-
     
     return (
-        <div className="mt-12 flex gap-x-8 gap-y-16 justify-between flex-wrap lg:flex-nowrap">
+        <div className="mt-12 p-6 flex gap-x-8 gap-y-16 justify-between flex-wrap lg:flex-nowrap">
             <div className="w-full flex mx-auto flex-col gap-4 sm:w-[45%] lg:[22%]">
                 <div className="flex">
                     <div className="relative w-full h-[400px]">

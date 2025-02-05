@@ -54,6 +54,12 @@ const initialState: CartState = {
           }
         }
       },
+      removeItem: (state, action: PayloadAction<number>) => {
+        state.cartItems = state.cartItems.filter(
+          (el) => el.product.id !== action.payload
+        );
+      },
+      
       clearCart: (state) => {
         state.cartItems = [];
       },
@@ -88,6 +94,6 @@ const initialState: CartState = {
       )
   );
   
-  export const { increment, decrement, clearCart } = cartSlice.actions;
+  export const { increment, decrement, removeItem, clearCart } = cartSlice.actions;
   
   export default cartSlice.reducer;

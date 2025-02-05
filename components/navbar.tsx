@@ -18,7 +18,6 @@ const NavbarApp = () => {
                 <Menu/>
                 <ThemeToggle/>
             </div>
-            
         </div>
         <div className="hidden md:flex items-center justify-between gap-8 h-full ">
             <Link href="/" className="hover:scale-110 transition ease-linear cursor-pointer">Slawyy&apos;s market</Link>

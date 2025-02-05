@@ -8,8 +8,12 @@ const AccountPage = async () => {
         redirect("/sign-in")
     }
   return (
-    <div>
+    <div className="flex items-center justify-center">
+      <div className="border- border rounded-md p-4 shadow-lg">
         <p>Account {session?.user?.email}</p>
+        <p>Name : {session?.user?.name}</p>
+      </div>
+        
     </div>
   )
 }
