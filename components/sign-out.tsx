@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { persistor } from "@/lib/store";
 import { signOut } from "next-auth/react";
 
 const SignOut = () => {

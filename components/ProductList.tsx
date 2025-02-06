@@ -61,7 +61,9 @@ const ProductList = (props: Props) => {
               </div>
               <div className="text-sm text-gray-500">{product.description}</div>
             </Link>
-            <AddToCart product={product}/>
+            <div className="max-w-24">
+              <AddToCart product={product}/>
+            </div>
           </div>
         ))}
     </div>

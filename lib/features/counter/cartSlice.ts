@@ -4,7 +4,6 @@ import {
     createSlice,
     PayloadAction,
   } from "@reduxjs/toolkit";
-  
 
 export interface Product {
     id: number;
@@ -19,15 +18,20 @@ export interface CartItem {
 }
 export interface CartState {
     cartItems: CartItem[];
+    userId: string | null; // 🔹 Ajout du userId
 }
 const initialState: CartState = {
     cartItems: [],
+    userId: null, // 🔹 Initialisation
 };
   
   export const cartSlice = createSlice({
     name: "cart",
     initialState,
     reducers: {
+      setUser: (state, action: PayloadAction<string | null>) => {
+        state.userId = action.payload; // 🔹 Mise à jour du userId dans Redux
+      },
       increment: (state, action: PayloadAction<Product>) => {
         const cartItem = state.cartItems.find(
           (el) => el.product.id === action.payload.id
@@ -94,6 +98,7 @@ const initialState: CartState = {
       )
   );
   
-  export const { increment, decrement, removeItem, clearCart } = cartSlice.actions;
-  
+  export const { setUser, increment, decrement, removeItem, clearCart } = cartSlice.actions;
+  // Sélecteur pour récupérer l'utilisateur associé au panier
+  export const selectUserId = (state: RootState) => state.cart.userId
   export default cartSlice.reducer;

@@ -8,7 +8,7 @@ import { executeAction } from "@/lib/executeAction";
 const Page = async () => {
   const session = await auth();
   if (session) redirect("/");
-
+  
   return (
     <div className="w-full bg--bac max-w-sm mx-auto space-y-6 shadow-2xl p-6 mt-20">
       <h1 className="text-2xl font-bold text-center mb-6">Sign In</h1>

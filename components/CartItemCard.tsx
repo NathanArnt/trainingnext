@@ -1,8 +1,9 @@
-import { CartItem, clearCart, removeItem } from '@/lib/features/counter/cartSlice'
+import { CartItem, clearCart, increment, decrement, removeItem } from '@/lib/features/counter/cartSlice'
 import { useAppDispatch } from '@/lib/store'
 import Image from 'next/image'
 import React from 'react'
 import { Button } from './ui/button'
+import QuantityBtn from './QuantityBtn'
 
 interface Props {
     cartItem: CartItem
@@ -26,16 +27,22 @@ const CartItemCard = ({cartItem}: Props) => {
                                 {/* TITLE */}
                                 <div className="flex items-center justify-between gap-8">
                                     <h3 className="font-semibold">{cartItem.product.name}</h3>
-                                    <p className="p-1 bg-gray-50 rounded-sm">{cartItem.product.price}$</p>
+                                    <p className="p-2 bg-gray-200 rounded-sm">{cartItem.product.price}$</p>
                                 </div>
                                 {/* DESC  */}
                                 <div className="text-sm  text-gray-500">
                                 available
                                 </div>
                             </div>
-                            <div className="flex justify-between items-center text-sm">
-                                <span className="text-gray-500">{cartItem.quantity}</span>
-                                <Button variant="destructive" onClick={() => dispatch(removeItem(cartItem.product.id))}>Remove</Button>
+                            <div className="flex justify-between items-center text-sm gap-6">
+                                <span className="text-gray-500">
+                                    <QuantityBtn
+                                        onDecrease={() => dispatch(decrement(cartItem.product))}
+                                        onIncrease={() => dispatch(increment(cartItem.product))}
+                                        quantity={cartItem.quantity}
+                                    />
+                                </span>
+                                <Button variant="secondary" onClick={() => dispatch(removeItem(cartItem.product.id))}>Remove</Button>
                             </div>
                         </div>
                     </div>

@@ -25,7 +25,6 @@ export default function RootLayout({
     >
       <body>
         <StoreProvider>
-
           <ThemeProvider
             enableSystem
             attribute='class'
@@ -40,7 +39,7 @@ export default function RootLayout({
               </main>
             </SessionProvider>
           </ThemeProvider>
-              </StoreProvider>
+        </StoreProvider>
       </body>
     </html>
   )

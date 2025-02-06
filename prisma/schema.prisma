@@ -24,6 +24,7 @@ model User {
   role          RoleUser        @default(CLIENT)
   emailVerified DateTime?       
   accounts      Account[] 
+  orders        Orders[]
   sessions      Session[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
@@ -100,7 +101,6 @@ model Products {
   image       String?      @db.VarChar(255)
   quantity    Int?           
   categories  Categories[]
-  orders   Orders[]
 }
 
 model Categories {
@@ -111,8 +111,10 @@ model Categories {
 
 model Orders {
   id        Int          @id @default(autoincrement())
+  userId    String
   totalPrice Float 
   status  String  @default("pending")
+  user         User     @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now())
-  products  Products[]
+  products  Json
 }
