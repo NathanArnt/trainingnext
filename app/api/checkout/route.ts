@@ -5,23 +5,23 @@ const prisma = new PrismaClient();
 
 export async function POST(req: Request) {
   try {
-    const { cartItems, totalPrice, user } = await req.json();
+    const { cartItems, totalPrice, userId } = await req.json();
 
     // Vérifier si le panier est vide
     if (!cartItems || cartItems.length === 0) {
       return NextResponse.json({ error: "Panier vide" }, { status: 400 });
     }
 
-    console.log("Utilisateur reçu dans l'API :", user);
+    console.log("Utilisateur reçu dans l'API :", userId);
 
-    if (!user || !user.id) {
+    if (!userId) {
       return NextResponse.json({ error: "Utilisateur non spécifié" }, { status: 400 });
     }
 
     // Sauvegarde de la commande dans la base de données
     const order = await prisma.orders.create({
       data: {
-        userId: user.id, // Associe la commande à l'utilisateur via userId
+        userId, // Associe la commande à l'utilisateur via userId
         products: cartItems, // Prisma doit accepter JSON ici
         totalPrice,
       },

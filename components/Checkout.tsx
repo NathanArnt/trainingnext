@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 
 const Checkout = () => {
   const dispatch = useDispatch();
-  const userId = useSelector(selectUserId);
+  const userId = useSelector(selectUserId) || "cm6tfh5cj000a8oju1gsa2k6m";
   const cart = useSelector((state: RootState) => state.cart);
   const [loading, setLoading] = useState(false);
   const totalPrice = cart.cartItems.reduce(
@@ -49,7 +49,7 @@ const Checkout = () => {
       const data = await response.json();
 
       if (response.ok) {
-        alert(`Commande passée avec succès ! Numéro : ${data.orderId}`);
+        alert(`Commande passée avec succès ! Numéro de commande : ${data.orderId}`);
         dispatch(clearCart()); // Vider le panier après succès
       } else {
         alert(data.error || "Erreur lors de la commande.");
@@ -65,7 +65,7 @@ const Checkout = () => {
   return (
     <div className="flex flex-col items-center space-y-4">
       <h2 className="text-xl font-semibold">Total : {totalPrice.toFixed(2)} €</h2>
-      <Button onClick={handleCheckout} disabled={loading || cart.cartItems.length === 0}>
+      <Button className="hover:scale-110 transition ease-linear scale-105" onClick={handleCheckout} disabled={loading || cart.cartItems.length === 0}>
         {loading ? "Traitement..." : "Passer la commande"}
       </Button>
     </div>
