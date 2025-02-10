@@ -11,28 +11,28 @@ interface Props {
 const ProductList = (props: Props) => {
 
     const [products, setProducts] = useState<Product[] | null>(null);
-      const [isLoading, setLoading] = useState(true);
+    const [isLoading, setLoading] = useState(true);
     
-      useEffect(() => {
-        fetch("/api/products")
-          .then((res) => res.json())
-          .then((data: Product[]) => {
-            setProducts(data); // Update state with fetched data
-            setLoading(false); // Stop loading
-          })
-          .catch((error) => {
-            console.error("Error fetching products:", error);
-            setLoading(false); // Stop loading even if there's an error
-          });
-      }, []);
-    
-      if (isLoading) {
-        return (
-            <div className="flex items-center justify-center">
-                <p>Loading....</p>
-            </div>
-        );
-      }
+    useEffect(() => {
+      fetch("/api/products")
+        .then((res) => res.json())
+        .then((data: Product[]) => {
+          setProducts(data); // Update state with fetched data
+          setLoading(false); // Stop loading
+        })
+        .catch((error) => {
+          console.error("Error fetching products:", error);
+          setLoading(false); // Stop loading even if there's an error
+        });
+    }, []);
+  
+    if (isLoading) {
+      return (
+          <div className="flex items-center justify-center">
+              <p>Loading....</p>
+          </div>
+      );
+    }
 
   return (
     <div className="mt-12 flex gap-x-8 gap-y-16 justify-between flex-wrap lg:flex-nowrap">

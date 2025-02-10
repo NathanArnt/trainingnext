@@ -1,12 +1,11 @@
 'use client'
 
-import { useAppDispatch, useAppSelector } from '@/lib/store'
+import { useAppSelector } from '@/lib/store'
 import React, { use } from 'react'
 
 const ViewCart = () => {
-  
-  const cartItems = useAppSelector(state => state.cart.cartItems);
-  return (
+    const cartItems = useAppSelector(state => state.cart.cartItems);
+    return (
     <div className='p-6 bg-gray-800 rounded-lg shadow-md'>
         <h2 className='text-2xl font-bold text-white mb-4'>Here is your detailed cart</h2>
         {cartItems.map(item => (

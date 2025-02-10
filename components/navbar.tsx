@@ -4,9 +4,14 @@ import Link from "next/link"
 import { ThemeToggle } from "./ui/theme-toggle"
 import Menu from "./Menu"
 import NavIcons from "./NavIcons"
+import CartModal from "./CartModal"
+import { ShoppingCart } from "lucide-react"
+import { useState } from "react"
 
 const NavbarApp = () => {
-
+    const [isCartOpen, setIsCartOpen] = useState(false);
+    const [isAccountOpen, setIsAccountOpen] = useState(false);
+    
   return (
     <div className="relative h-20 px-4 md:px-8 lg:px-16 xl:32 2xl:px-64">
         {/* Mobile  */}
@@ -15,6 +20,13 @@ const NavbarApp = () => {
                 <div className="text-2xl tracking-widest">SLAWYY</div>
             </Link>
             <div className="flex items-center gap-2">
+            <div className="relative cursor-pointer hover:scale-110 transition ease-linear" 
+                onClick={() => {
+                    setIsCartOpen(prev => !prev);
+                    setIsAccountOpen(false);
+                }}>
+                    <ShoppingCart/>
+            </div>
                 <Menu/>
                 <ThemeToggle/>
             </div>
@@ -24,7 +36,7 @@ const NavbarApp = () => {
             <div className="Links flex items-center gap-4">
                 <Link href="/" className="flex items-center  hover:scale-110 transition ease-linear">Home</Link>
                 <Link href="/list" className="flex items-center hover:scale-110 transition ease-linear">Shop</Link>
-                <Link href="" className="flex items-center hover:scale-110 transition ease-linear">Deals</Link>
+                <Link href="/deals" className="flex items-center hover:scale-110 transition ease-linear">Deals</Link>
                 <Link href="" className="flex items-center hover:scale-110 transition ease-linear">About</Link>
                 <Link href="" className="flex items-center hover:scale-110 transition ease-linear">Contact</Link>
             </div>
@@ -33,6 +45,7 @@ const NavbarApp = () => {
                 <div className="hover:scale-110 transition ease-linear"><ThemeToggle /></div>
             </div>
         </div>
+        {isCartOpen && <CartModal />}
     </div>
   )
 }

@@ -12,7 +12,7 @@ interface Props {
 
 const QuantityBtn = (props: Props) => {
   return (
-    <div className='flex min-w-24 justify-between gap-2 items-center'>
+    <div className='flex max-w-24 justify-between gap-2 items-center'>
         <Button className="h-8 w-8" variant="destructive" onClick={props.onDecrease}>
           {props.quantity === 1 ? <Trash/> : "-"}
         </Button>

@@ -1,7 +1,5 @@
 'use client'
 
-
-import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
 import { SignOut } from "./Sign-out"
@@ -11,7 +9,7 @@ const Menu = () => {
 
     const [open, setOpen] = useState(false)
   return (
-    <div className="">
+    <div className="hover:cursor-pointer">
         <div onClick={() => setOpen((prev) => !prev)}><MenuIcon className="h-8 w-8"/></div>
         {
             open && (
@@ -20,6 +18,7 @@ const Menu = () => {
                     <Link href="/list" className="hover:scale-110 transition ease-linear">Shop</Link>
                     <Link href="" className="hover:scale-110 transition ease-linear">Deals</Link>
                     <Link href="" className="hover:scale-110 transition ease-linear">About</Link>
+                    <Link href="/customers/account" className="hover:scale-110 transition ease-linear">Account</Link>
                     <Link href="" className="hover:scale-110 transition ease-linear">Contact</Link>
                     <SignOut/>
                 </div>
