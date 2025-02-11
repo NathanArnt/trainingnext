@@ -7,6 +7,7 @@ import NavIcons from "./NavIcons"
 import CartModal from "./CartModal"
 import { ShoppingCart } from "lucide-react"
 import { useState } from "react"
+import TransitionLink from "./TransitionLink"
 
 const NavbarApp = () => {
     const [isCartOpen, setIsCartOpen] = useState(false);
@@ -34,11 +35,11 @@ const NavbarApp = () => {
         <div className="hidden md:flex items-center justify-between gap-8 h-full ">
             <Link href="/" className="hover:scale-110 transition ease-linear cursor-pointer">Slawyy&apos;s market</Link>
             <div className="Links flex items-center gap-4">
-                <Link href="/" className="flex items-center  hover:scale-110 transition ease-linear">Home</Link>
-                <Link href="/list" className="flex items-center hover:scale-110 transition ease-linear">Shop</Link>
-                <Link href="/deals" className="flex items-center hover:scale-110 transition ease-linear">Deals</Link>
-                <Link href="" className="flex items-center hover:scale-110 transition ease-linear">About</Link>
-                <Link href="" className="flex items-center hover:scale-110 transition ease-linear">Contact</Link>
+                <TransitionLink href="/" label="Home"/>
+                <TransitionLink href="/list" label="Shop"/>
+                <TransitionLink href="/deals" label="Deals" />
+                <TransitionLink href="" label="About" />
+                <TransitionLink href="" label="Contact" />
             </div>
             <div className="flex items-center gap-4">
                 <NavIcons/>

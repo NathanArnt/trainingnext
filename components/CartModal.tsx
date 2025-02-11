@@ -27,7 +27,7 @@ const CartModal = () => {
             </div>
         ) : (
             <div className="">
-                <h2 className="text-xl">Shopping Cart</h2>
+                <h2 className="text-xl mb-2">Shopping Cart</h2>
                 {/* LIST  */}
                 <div className="flex flex-col gap-8 max-h-[400px] overflow-y-auto">
                     {/* ITEM  */}
@@ -37,7 +37,7 @@ const CartModal = () => {
                 </div>
                 {/* BOTTOM  */}
                 <div className="">
-                    <div className="flex items-center mb-2 justify-between font-semibold">
+                    <div className="flex items-center mb-2 mt-4 justify-between font-semibold">
                         <span className="">Subtotal</span>
                         <span className="">{totalPrice} $</span>
                     </div>
